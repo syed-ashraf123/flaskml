@@ -27,7 +27,7 @@ print(model)
 #		mydb.commit()
 app = Flask(__name__)
 
-@app.route('/home',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def home():
 	print('dcdcdc')
 	if (request.method=='POST'):
