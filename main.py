@@ -29,7 +29,7 @@ app = Flask(__name__)
 
 @app.route('/',methods=['GET','POST'])
 def home():
-	print('dcdcdc')
+	#print('dcdcdc')
 	if (request.method=='POST'):
 		def predict(year,km,ml,en,pwr,st,cm,ct,ty,tran,own):
 			l=[year,km,ml,en,pwr,st]
@@ -44,7 +44,7 @@ def home():
 					ll[ll.index(i)]=0
 			l.extend(ll)
 			predict.x=model.predict([l])
-			print(predict.x)
+			#print(predict.x)
 		year=request.form.get('year')
 		km=request.form.get('km')
 		ml=int(request.form.get('mileage'))
