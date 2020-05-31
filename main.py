@@ -63,5 +63,5 @@ def home():
 		return render_template('front.html',show_results=round(predict.x[0],2))
 	else:
 		return render_template('front.html')
-
-app.run(debug=True)
+if __name__=="__main__":
+	app.run(debug=True)
