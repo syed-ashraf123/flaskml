@@ -1,29 +1,30 @@
 from flask import Flask,render_template,request
-from flask_mysqldb import MySQL
-import mysql.connector
-import pickle
+#from flask_mysqldb import MySQL
+#import mysql.connector
+#import pickle
 #model=pickle.load(open('regressor_2latest22.pkl','rb'))
+from sklearn.externals import joblib
 model=joblib.load('pickle_file_name.pkl')
 print(model)
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="newuser",
-  passwd="root",
-  database="car_db"
-)
+#mydb = mysql.connector.connect(
+#  host="localhost",
+#  user="newuser",
+#  passwd="root",
+#  database="car_db"
+#)
 
-class db:
+#class db:
 	# def __init__(self,ii, name, last):
 	# 	self.ii = ii
 	# 	self.name = name
 	# 	self.last = last
 	# 	global mydb
-	def data(self,year,km,ml,en,pwr,st,cm,ct,ty,tran,own):
-		mycursor=mydb.cursor()
-		sql="insert into car(years,km,ml,en,pwr,st,cm,ct,ty,tran,own) VALUES (%s, %s, %s,%s, %s, %s,%s, %s, %s,%s,%s)"
-		val = (year,km,ml,en,pwr,st,cm,ct,ty,tran,own)
-		mycursor.execute(sql,val)
-		mydb.commit()
+#	def data(self,year,km,ml,en,pwr,st,cm,ct,ty,tran,own):
+#		mycursor=mydb.cursor()
+#		sql="insert into car(years,km,ml,en,pwr,st,cm,ct,ty,tran,own) VALUES (%s, %s, %s,%s, %s, %s,%s, %s, %s,%s,%s)"
+#		val = (year,km,ml,en,pwr,st,cm,ct,ty,tran,own)
+#		mycursor.execute(sql,val)
+#		mydb.commit()
 app = Flask(__name__)
 
 @app.route('/home',methods=['GET','POST'])
@@ -56,9 +57,9 @@ def home():
 		tran=request.form.get('trans')
 		own=request.form.get('owner')
 		predict(year,km,ml,en,pwr,st,cm,ct,ty,tran,own)
-		ll=db()
+		#ll=db()
 
-		ll.data(int(year),int(km),int(ml),int(en),int(pwr),st,cm,ct,ty,tran,own)
+		#ll.data(int(year),int(km),int(ml),int(en),int(pwr),st,cm,ct,ty,tran,own)
 		return render_template('front.html',show_results=round(predict.x[0],2))
 	else:
 		return render_template('front.html')
